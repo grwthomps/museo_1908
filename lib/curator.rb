@@ -29,4 +29,22 @@ class Curator
     end
   end
 
+  def artists_with_multiple_photographs
+    artist_id_arr = @photographs.map do |photograph|
+      photograph.artist_id
+    end
+
+    mult_artists = artist_id_arr.find_all do |artist_id|
+      artist_id_arr.count(artist_id) > 1
+    end
+
+    answer = []
+    @artists.each do |artist|
+      if mult_artists.include?(artist.id)
+        answer << artist
+      end
+    end
+    answer
+  end
+
 end
