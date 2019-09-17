@@ -38,23 +38,18 @@ class Curator
       artist_id_arr.count(artist_id) > 1
     end
 
-    answer = []
-    @artists.each do |artist|
-      if mult_artists.include?(artist.id)
-        answer << artist
-      end
+    @artists.find_all do |artist|
+      mult_artists.include?(artist.id)
     end
-    answer
   end
 
   def photographs_taken_by_artist_from(country)
-    artist_country = @artists.find_all{|artist| artist.country == country}
+    artist_from_country = @artists.find_all{|artist| artist.country == country}
+
     photos = []
-    @photographs.find_all do |photograph|
-      artist_country.each do |artist|
-        if photograph.artist_id == artist.id
-          photos << photograph
-        end
+    @photographs.each do |photograph|
+      artist_from_country.each do |artist|
+        photos << photograph if photograph.artist_id == artist.id
       end
     end
     photos
