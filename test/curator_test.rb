@@ -144,4 +144,11 @@ class CuratorTest < Minitest::Test
     assert_equal "Henri Cartier-Bresson", @curator.imported_artists[0][:name]
   end
 
+  def test_finding_photos_in_range_of_years
+    @curator.load_photographs('./data/photographs.csv')
+    @curator.load_artists('./data/artists.csv')
+
+    assert_equal [], @curator.photographs_taken_between(1950..1965) # need to load imported photos into test
+  end
+
 end
