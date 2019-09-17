@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/curator'
 require './lib/artist'
 require './lib/photograph'
+require './lib/fileio'
 
 class CuratorTest < Minitest::Test
 
@@ -127,6 +128,20 @@ class CuratorTest < Minitest::Test
 
     assert_equal [@photo_2, @photo_3, @photo_4], @curator.photographs_taken_by_artist_from("United States")
     assert_equal [], @curator.photographs_taken_by_artist_from("Argentina")
+  end
+
+  def test_loading_photographs
+    @curator.load_photographs('./data/photographs.csv')
+
+    assert @curator.imported_photographs.count > 0
+    assert_equal "Rue Mouffetard, Paris (Boy with Bottles)", @curator.imported_photographs[0][:name]
+  end
+
+  def test_loading_artists
+    @curator.load_artists('./data/artists.csv')
+
+    assert @curator.imported_artists.count > 0
+    assert_equal "Henri Cartier-Bresson", @curator.imported_artists[0][:name]
   end
 
 end
