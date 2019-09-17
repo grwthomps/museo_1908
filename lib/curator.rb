@@ -1,10 +1,12 @@
 class Curator
 
-  attr_reader :photographs, :artists
+  attr_reader :photographs, :artists, :imported_photographs, :imported_artists
 
   def initialize
     @photographs = []
     @artists = []
+    @imported_photographs = []
+    @imported_artists = []
   end
 
   def add_photograph(photo)
@@ -53,6 +55,14 @@ class Curator
       end
     end
     photos
+  end
+
+  def load_photographs(file_path)
+    @imported_photographs = FileIO.load_photographs(file_path)
+  end
+
+  def load_artists(file_path)
+    @imported_artists = FileIO.load_artists(file_path)
   end
 
 end
