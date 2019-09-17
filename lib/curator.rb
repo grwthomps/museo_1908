@@ -65,4 +65,10 @@ class Curator
     @imported_artists = FileIO.load_artists(file_path)
   end
 
+  def photographs_taken_between(range)
+    @imported_photographs.find_all do |photo|
+      photo[:year].to_i.between?(range.first, range.last)
+    end
+  end
+
 end
