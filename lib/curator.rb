@@ -47,4 +47,17 @@ class Curator
     answer
   end
 
+  def photographs_taken_by_artist_from(country)
+    artist_country = @artists.find_all{|artist| artist.country == country}
+    photos = []
+    @photographs.find_all do |photograph|
+      artist_country.each do |artist|
+        if photograph.artist_id == artist.id
+          photos << photograph
+        end
+      end
+    end
+    photos
+  end
+
 end

@@ -117,7 +117,6 @@ class CuratorTest < Minitest::Test
   end
 
   def test_finding_photos_taken_by_artist_from_specific_country
-    skip
     @curator.add_artist(@artist_1)
     @curator.add_artist(@artist_2)
     @curator.add_artist(@artist_3)
